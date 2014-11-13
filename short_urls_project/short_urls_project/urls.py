@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'short_urls_project.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+from short_urls_app.views import ShortUrlAddView, ShortUrlRedirectView
 
+urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^$', ShortUrlAddView.as_view()),
+    url(r'^(?P<code>\w+)', ShortUrlRedirectView.as_view()),
 )
